@@ -61,7 +61,7 @@ namespace OOP_Biograf_Opgave
                         Fortsaet();
                         break;
                     case ConsoleKey.D3:
-                        DataCmd.SletKunde(Skriv.IndtastAlt());
+                        DataCmd.SletKunde(Skriv.IndtastId());
                         Godkendt = true;
                         Fortsaet();
                         break;
