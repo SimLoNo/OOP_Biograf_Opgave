@@ -15,6 +15,15 @@ namespace OOP_Biograf_Opgave
         public int Tlf { get; set; }
         public string Kundetype { get; set; }
 
+        //public enum KnType
+        //{ 
+        //NA,
+        //Fattigkunde,
+        //Standardkunde,
+        //Rigkunde,
+        //VIPKunde
+        //}
+
         public Kunder(int id, string fornavn, string efternavn, string email, int tlf, string kundetype) 
         {
             Id = id;

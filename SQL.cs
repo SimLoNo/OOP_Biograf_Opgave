@@ -91,7 +91,7 @@ namespace OOP_Biograf_Opgave
             catch (Exception Ex) { Console.WriteLine(Ex.Message.ToString()); }
             
         }
-        public void SletBruger(Kunder Kunde) 
+        public void SletKunde(Kunder Kunde) 
         {
             using (SqlConnection Con = new SqlConnection(ConString))
             {
