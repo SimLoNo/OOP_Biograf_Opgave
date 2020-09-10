@@ -52,5 +52,74 @@ namespace OOP_Biograf_Opgave
             }
 
         }
+        public void OpretKunde(Kunder Kunde) 
+        {
+            try
+            {
+                using (SqlConnection Con = new SqlConnection(ConString))
+                {
+                    Con.Open();
+                    SqlCommand Cmd = new SqlCommand("INSERT INTO Kunder VALUES ('" + Kunde.Fornavn + "','" + Kunde.Efternavn + "','" + Kunde.Email + "','" + Kunde.Tlf + "','" + Kunde.Kundetype + "')", Con);
+                    Cmd.ExecuteNonQuery();
+                }
+            }
+            catch (Exception Ex) { Console.WriteLine(Ex.Message.ToString()); }
+        }
+        public void RedigerKunde(Kunder Kunde) 
+        {
+            try
+            {
+                using (SqlConnection Con = new SqlConnection(ConString))
+                {
+                    Con.Open();
+                    SqlCommand CmdSelect = new SqlCommand("SELECT Id from Kunder", Con);
+                    SqlCommand CmdInsert = new SqlCommand("UPDATE Kunder SET Fornavn ='" + Kunde.Fornavn + "', Efternavn = '" + Kunde.Efternavn + "', Email = '" + Kunde.Email + "', Tlf = " + Kunde.Tlf + ",Kundetype = '" + Kunde.Kundetype + "' WHERE Id ="+Kunde.Id, Con);
+                    SqlDataReader Reader = CmdSelect.ExecuteReader();
+                    bool IdFundet = false;
+                    while (Reader.Read()) 
+                    {
+                        if (Reader.GetInt32(0) == Kunde.Id) IdFundet = true;
+                    }
+                    Reader.Close();
+                    if (IdFundet == true) CmdInsert.ExecuteNonQuery();
+
+
+
+
+                }
+            }
+            catch (Exception Ex) { Console.WriteLine(Ex.Message.ToString()); }
+            
+        }
+        public void SletBruger(Kunder Kunde) 
+        {
+            using (SqlConnection Con = new SqlConnection(ConString))
+            {
+                Con.Open();
+                SqlCommand CmdSelectKunder = new SqlCommand("SELECT Id from Kunder WHERE Id = "+Kunde.Id, Con);
+                SqlCommand CmdSelectBestilling = new SqlCommand("SELECT KundeId from Bestilling WHERE KundeId = "+Kunde.Id, Con);
+                SqlCommand CmdDelete = new SqlCommand("DELETE FROM Kunder WHERE Id = "+Kunde.Id, Con);
+                SqlDataReader ReaderKunder = CmdSelectKunder.ExecuteReader();
+                bool KundeIdFundet = false;
+                bool BestillingIdFundet = false;
+                while (ReaderKunder.Read())
+                {
+                    if (ReaderKunder.GetInt32(0) == Kunde.Id) KundeIdFundet = true;
+                }
+                ReaderKunder.Close();
+                SqlDataReader ReaderBestilling = CmdSelectBestilling.ExecuteReader();
+                while (ReaderBestilling.Read())
+                {
+                    if (ReaderBestilling.GetInt32(0) == Kunde.Id) BestillingIdFundet = true;
+                }
+                ReaderBestilling.Close();
+                if (KundeIdFundet == true && BestillingIdFundet == false) CmdDelete.ExecuteNonQuery();
+                else Console.WriteLine("Kunde findes ikke, eller har en bestilling");
+
+
+
+
+            }
+        }
     }
 }

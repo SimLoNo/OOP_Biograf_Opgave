@@ -24,5 +24,9 @@ namespace OOP_Biograf_Opgave
             Tlf = tlf;
             Kundetype = kundetype;
         }
+        public override string ToString()
+        {
+            return (Id +" " + Fornavn + " " + Efternavn + " " + Email + " " + Tlf + " " + Kundetype);
+        }
     }
 }
