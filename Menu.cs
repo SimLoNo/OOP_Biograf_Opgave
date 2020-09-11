@@ -17,6 +17,7 @@ namespace OOP_Biograf_Opgave
             Console.WriteLine("4:      Vis brugere sorteret efter efternavn");
             Console.WriteLine("5:      Vis brugere usorteret");
             Console.WriteLine("6:      Vis Ordre");
+            Console.WriteLine("7:      Opret Ordre");
             Console.WriteLine("Escape: for at afslutte programmet");
 
 
@@ -65,6 +66,7 @@ namespace OOP_Biograf_Opgave
             ConsoleKey Valg;
             bool Godkendt = false;
             SQL DataCmd = new SQL();
+            Ordre Ordre = new Ordre();
             Indtast Skriv = new Indtast();
             do
             {
@@ -98,6 +100,11 @@ namespace OOP_Biograf_Opgave
                         break;
                     case ConsoleKey.D6:
                         SkrivOrdre();
+                        Godkendt = true;
+                        Fortsaet();
+                        break;
+                    case ConsoleKey.D7:
+                        Ordre.OpretBestilling();
                         Godkendt = true;
                         Fortsaet();
                         break;

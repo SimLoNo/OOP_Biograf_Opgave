@@ -146,5 +146,14 @@ namespace OOP_Biograf_Opgave
             
             }
         }
+        public void OpretBestilling(Bestilling Ordre) 
+        {
+            using (SqlConnection Con = new SqlConnection(ConString)) 
+            {
+                Con.Open();
+                SqlCommand Cmd = new SqlCommand("INSERT INTO Bestilling VALUES (" + Ordre.KundeId + ",'" + Ordre.Bestillingstid + "','" + Ordre.Film + "','" + Ordre.Betalling+"')", Con);
+                Cmd.ExecuteNonQuery();
+            }
+        }
     }
 }

@@ -142,15 +142,40 @@ namespace OOP_Biograf_Opgave
             return KundeType;
 
         }
-        //public DateTime IndtastDato()
-        //{
-        //    DateTime BestilFør = DateTime.Now.AddYears(1);
-        //    DateTime Forestilling = DateTime.MinValue;
-        //    do
-        //    {
-        //        Console.WriteLine("Indtast);
+        public DateTime IndtastDato()
+        {
+            DateTime BestilFoer = DateTime.Now.AddYears(1);
+            DateTime Forestilling = DateTime.MinValue;
+            string Input;
+            do
+            {
+                Console.WriteLine($"Indtast Hvornår du vil se filmen, i format DD-MM-YYYY-TT-MM");
+                try
+                {
+                    Input = Console.ReadLine();
+                    Forestilling = DateTime.Parse(Input);
+                    Console.Clear();
+                }
+                catch (Exception Ex) { Console.WriteLine("Input ikke godkendt, prøv igen." + Ex.Message.ToString()) ; }
 
-        //    } while (Forestilling.Year > BestilFør.Year || Forestilling.Year < DateTime.Now.Year);
-        //}
+            } while ((Forestilling.Year > BestilFoer.Year || Forestilling < DateTime.Now.AddHours(1)));
+            return Forestilling;
+        }
+        public string IndtastFilm() 
+        {
+            string Film;
+            Console.WriteLine("Indtast den ønskede film:");
+            Film = Console.ReadLine();
+            return Film;
+
+        }
+        public string IndtastBetalling() 
+        {
+            Console.WriteLine("Ønsker du at betale nu, tast: 1");
+            Console.WriteLine("Ønsker du at betale senere, tast vilkårlig anden tast.");
+            ConsoleKey Input = Console.ReadKey(true).Key;
+            if (Input == ConsoleKey.D1) return "Betalt";
+            else return "Reserveret";
+        }
     }
 }
