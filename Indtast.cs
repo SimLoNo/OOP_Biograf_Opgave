@@ -149,7 +149,7 @@ namespace OOP_Biograf_Opgave
             string Input;
             do
             {
-                Console.WriteLine($"Indtast Hvornår du vil se filmen, i format DD-MM-YYYY-TT-MM");
+                Console.WriteLine($"Indtast Hvornår du vil se filmen, i format DD-MM-YYYY TT:MM");
                 try
                 {
                     Input = Console.ReadLine();

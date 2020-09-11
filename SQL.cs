@@ -152,7 +152,11 @@ namespace OOP_Biograf_Opgave
             {
                 Con.Open();
                 SqlCommand Cmd = new SqlCommand("INSERT INTO Bestilling VALUES (" + Ordre.KundeId + ",'" + Ordre.Bestillingstid + "','" + Ordre.Film + "','" + Ordre.Betalling+"')", Con);
-                Cmd.ExecuteNonQuery();
+                try
+                {
+                    Cmd.ExecuteNonQuery();
+                }
+                catch (Exception) { Console.WriteLine("Der kunne ikke bestilles."); }
             }
         }
     }
