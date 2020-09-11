@@ -121,5 +121,30 @@ namespace OOP_Biograf_Opgave
 
             }
         }
+
+        public List<Bestilling> VisBestilling(int id) 
+        {
+            using (SqlConnection Con = new SqlConnection(ConString)) 
+            {
+                Con.Open();
+                SqlCommand Sql = new SqlCommand("SELECT Fornavn, Efternavn, KundeId, Bestillingstid, Film, Betaling FROM Kunder,Bestilling WHERE Bestilling.KundeId = Kunder.Id and Kunder.Id = " + id, Con);
+                List<Bestilling> OrdreList = new List<Bestilling>();
+                SqlDataReader Reader = Sql.ExecuteReader();
+                while (Reader.Read()) 
+                {
+                    string Fornavn = Reader.GetString(0);
+                    string Efternavn = Reader.GetString(1);
+                    int KundeId = Reader.GetInt32(2);
+                    DateTime Tid = Reader.GetDateTime(3);
+                    string Film = Reader.GetString(4);
+                    string Betalling = Reader.GetString(5);
+                    Bestilling Ordre = new Bestilling(Fornavn, Efternavn, KundeId, Tid, Film, Betalling);
+                    OrdreList.Add(Ordre);
+                }
+                return OrdreList;
+
+            
+            }
+        }
     }
 }

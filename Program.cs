@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace OOP_Biograf_Opgave
-{
+{//Opmærksom på at klasser skal være ental. Fokusere på at kode funktionalitet, hvis der er tid tilovers retter jeg Kunder klassen.
     class Program
     {
         static void Main(string[] args)

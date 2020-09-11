@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace OOP_Biograf_Opgave
 {
     class Menu
-    {public void HovedmenuTekst()
+    { public void HovedmenuTekst()
         {
             Console.Clear();
             Console.WriteLine("Velkommen til Biografen, tast følgende for diverse menuer:");
@@ -16,18 +16,20 @@ namespace OOP_Biograf_Opgave
             Console.WriteLine("3:      Slet bruger");
             Console.WriteLine("4:      Vis brugere sorteret efter efternavn");
             Console.WriteLine("5:      Vis brugere usorteret");
+            Console.WriteLine("6:      Vis Ordre");
             Console.WriteLine("Escape: for at afslutte programmet");
 
-        
-        }
 
-        public void Fortsaet() 
+        }
+        
+
+        public void Fortsaet()
         {
             Console.WriteLine("Indtast vilkårlig tast for at fortsætte.");
             Console.ReadKey(true);
         }
 
-        public void SkrivTabel(bool Valg) 
+        public void SkrivTabel(bool Valg)
         {
             Console.Clear();
             SQL DataCmd = new SQL();
@@ -38,6 +40,25 @@ namespace OOP_Biograf_Opgave
                 Console.WriteLine(item.ToString());
             }
 
+        }
+        public void SkrivOrdre()
+        {
+            Console.Clear();
+            Indtast Skriv = new Indtast();
+            SQL DataCmd = new SQL();
+            List<Bestilling> Ordre = new List<Bestilling>();
+            Ordre = DataCmd.VisBestilling(Skriv.IndtastId());
+            
+            if (Ordre.Count >= 1) 
+            {
+                Ordre.Sort();
+                Console.WriteLine("Ordre:");
+                foreach (var item in Ordre)
+                {
+                    Console.WriteLine($"Navn: {item.Fornavn} {item.Efternavn} Film: {item.Film} {item.Bestillingstid} Betallingsstatus: {item.Betalling}");
+                }
+            }
+            else Console.WriteLine("Der kunne ikke findes nogle ordre.");
         }
         public ConsoleKey Hovedmenuvalg() 
         {
@@ -75,6 +96,11 @@ namespace OOP_Biograf_Opgave
                         Godkendt = true;
                         Fortsaet();
                         break;
+                    case ConsoleKey.D6:
+                        SkrivOrdre();
+                        Godkendt = true;
+                        Fortsaet();
+                        break;
                     case ConsoleKey.Escape:
                         Godkendt = true;
                         break;
@@ -85,7 +111,7 @@ namespace OOP_Biograf_Opgave
 
                 }
 
-            } while (Godkendt = false);
+            } while (Godkendt == false);
             return Valg;
         }
     }

@@ -8,7 +8,7 @@ namespace OOP_Biograf_Opgave
 {
     class Indtast
     {
-        public Kunder IndtastAlt() 
+        public Kunder IndtastAlt()
         {
             int Id = IndtastId();
             string Fornavn = IndtastFornavn();
@@ -19,7 +19,7 @@ namespace OOP_Biograf_Opgave
             Kunder Kunde = new Kunder(Id, Fornavn, Efternavn, Email, Tlf, Kundetype);
             return Kunde;
         }
-        public int IndtastId() 
+        public int IndtastId()
         {
             int KundeId = 0;
             do
@@ -40,7 +40,7 @@ namespace OOP_Biograf_Opgave
             if (KundeId > 0) return KundeId;
             else return 0;
         }
-        public string IndtastFornavn() 
+        public string IndtastFornavn()
         {
             bool Godkendt = false;
             string Fornavn;
@@ -57,7 +57,7 @@ namespace OOP_Biograf_Opgave
                 }
             } while (Godkendt == false);
             return Fornavn;
-        
+
         }
 
         public string IndtastEfternavn()
@@ -130,7 +130,7 @@ namespace OOP_Biograf_Opgave
             {
                 Console.WriteLine("Indtast venligst kundens kundetype, og tryk enter.");
                 KundeType = Console.ReadLine();
-                
+
                 if (KundeType.Length >= 4 && KundeType.Length <= 20) Godkendt = true;
                 else
                 {
@@ -142,5 +142,15 @@ namespace OOP_Biograf_Opgave
             return KundeType;
 
         }
+        //public DateTime IndtastDato()
+        //{
+        //    DateTime BestilFør = DateTime.Now.AddYears(1);
+        //    DateTime Forestilling = DateTime.MinValue;
+        //    do
+        //    {
+        //        Console.WriteLine("Indtast);
+
+        //    } while (Forestilling.Year > BestilFør.Year || Forestilling.Year < DateTime.Now.Year);
+        //}
     }
 }
